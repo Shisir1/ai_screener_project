@@ -28,10 +28,10 @@ class Config:
     #Model
     random_state: int = 42
 
-    DEFAULT_TICKERS = [ # ETFs (examples)
+DEFAULT_TICKERS = [ # ETFs (examples)
     "SPY","QQQ","IWM","EFA","EEM","TLT","IEF","GLD","USO",
     # A few large-cap stocks (replace with your universe)
     "AAPL","MSFT","AMZN","NVDA","GOOGL","META","TSLA","JPM","UNH","XOM",
     ]
 
-    CFG = Config(tickers=DEFAULT_TICKERS)
+CFG = Config(tickers=DEFAULT_TICKERS)
