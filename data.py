@@ -15,7 +15,7 @@ def download_ohlcv(tickers: List[str], start: str, interval: str = "1d") -> pd.D
     Returns:
     pd.DataFrame: Multi-index DataFrame with OHLCV data.
     """
-    data = yf.download(
+    df = yf.download(
         tickers = tickers, 
         start=start, 
         interval=interval, 
