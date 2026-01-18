@@ -33,7 +33,7 @@ def download_ohlcv(tickers: List[str], start: str, interval: str = "1d") -> pd.D
         df.columns = pd.MultiIndex.from_product([df.columns, ["SINGLE"]])
         return df.sort_index()
     
-def to_logn(df: pd.DataFrame) -> pd.DataFrame:
+def to_long(df: pd.DataFrame) -> pd.DataFrame:
     """
     Convert MultiIndex OHLCV dataframe to long format:
       date, ticker, open, high, low, close, adjclose?, volume
