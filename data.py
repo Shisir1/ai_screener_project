@@ -23,7 +23,7 @@ def download_ohlcv(tickers: List[str], start: str, interval: str = "1d") -> pd.D
         auto_adjust=False,
         threads= True,
         progress=False)
-    if df.emtpy:
+    if df.empty:
         raise RuntimeError("No data returned from yfinance. Check the tickers and date range, internet or yfinance limits.")
     #Ensure consistent column structure: (Field, Ticker)
     if isinstance(df.columns, pd.MultiIndex):
@@ -45,7 +45,7 @@ def to_long(df: pd.DataFrame) -> pd.DataFrame:
         if(field,) == ("Adj Close",):
             continue
         slice_ = df[field].copy()
-        slice.columns.name = "ticker"
+        slice_.columns.name = "ticker"
         slice_ = slice_.stack().rename(field.lower().replace(" ", ""))
         out.append(slice_)
 

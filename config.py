@@ -8,7 +8,7 @@ class Config:
     benchmark: str = "SPY"
 
     #data
-    start: str = "2025-01-01"
+    start: str = "2015-01-01"
     interval: str = "1d"
 
     #labels

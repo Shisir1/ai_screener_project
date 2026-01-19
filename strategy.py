@@ -56,7 +56,7 @@ def rank_for_date(
     #Final score blend
     #normalize ml_score cross0sectioanlly
     ml = d["ml_score"].replace([np.inf, -np.inf], np.nan)
-    d["ml_z"] = (ml -ml.menan()) / (ml.std() if ml.std() !=0 else 1)
+    d["ml_z"] = (ml -ml.mean()) / (ml.std() if ml.std() !=0 else 1)
     d["final_score"] = 0.6 * d["ml_z"] + 0.4 * d["sig_score"]
 
     #filter by guards

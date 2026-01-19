@@ -38,10 +38,10 @@ def main():
 
     model = joblib.load("model.joblib")
 
-    tickers = sorted(set(CFG.tickers + [CFG.benchmark_ticker]))
+    tickers = sorted(set(CFG.tickers + [CFG.benchmark]))
     raw = download_ohlcv(tickers=tickers, start=CFG.start, interval=CFG.interval)
     long = to_long(raw)
-    feat = add_features(long, benchmark_ticker=CFG.benchmark_ticker)
+    feat = add_features(long, benchmark_ticker=CFG.benchmark)
 
     scored = predict_scores(model, feat)
 
@@ -83,7 +83,7 @@ def main():
     now_set = set(top["ticker"].tolist())
     out_of_top = [t for t in held if t not in now_set and t != CFG.benchmark]
     out_df = pd.DataFrame([{"date": asof_date, "ticker": t, "reason": "Fell out of top-K"} for t in out_of_top])
-    sells = pd.concat([exits, out_df], ignore_index=True).drop_duplicates(sunbset=["ticker", "reason"])
+    sells = pd.concat([exits, out_df], ignore_index=True).drop_duplicates(subset=["ticker", "reason"])
 
     #Buy candidates are current top-K minus held tickers
     buy_tickers = [t for t in top["ticker"].tolist() if t not in held and t != CFG.benchmark]

@@ -56,7 +56,11 @@ def add_features(long: pd.DataFrame, benchmark_ticker: str = "SPY") -> pd.DataFr
 
         return g
 
-    df = df.groupby("ticker", group_keys=False).apply(per_ticker)
+    df = (
+        df.sort_values(["ticker", "date"])
+            .groupby("ticker", group_keys=False)
+            .apply(lambda g: per_ticker(g.reset_index(drop=True)))
+    )
 
     # Relative strength vs benchmark (same dates)
     bench = df[df["ticker"] == benchmark_ticker][["date", "close"]].rename(columns={"close":"bench_close"})
