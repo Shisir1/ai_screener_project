@@ -8,6 +8,8 @@ from features import add_features
 from strategy import rank_for_date, compute_exits
 from alerts import send_email
 from model import predict_scores
+from dotenv import load_dotenv
+load_dotenv()
 
 def format_reco_email(asof_date:pd.Timestamp, buys: pd.DataFrame, sells: pd.DataFrame) -> str:
     lines = []

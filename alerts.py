@@ -26,5 +26,12 @@ def send_email(subject: str, body: str, to_email: str, from_email: Optional[str]
 
     with smtplib.SMTP(host, port) as server:
         server.starttls()
-        server.login(user, pwd)
+        try:
+            server.login(user, pwd)
+        except smtplib.SMTPAuthenticationError as e:
+            raise RuntimeError(
+                "SMTP auth failed. If using Gmail, you likely need an App Password "
+                "(Google Account -> Security -> 2-Step Verification -> App passwords)."
+            ) from e
+
         server.sendmail(from_email, [to_email], msg.as_string())
